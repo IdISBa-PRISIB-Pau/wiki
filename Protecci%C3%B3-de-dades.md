@@ -1,0 +1,2 @@
+- [Centro Criptográfico Nacional - ANGELES](https://angeles.ccn-cert.cni.es/es/)
+- [Amnesia Data Anonymization Tool](https://amnesia.openaire.eu/)

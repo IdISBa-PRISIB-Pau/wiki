@@ -1,0 +1,1 @@
+La recerca amb dades observacionals o Real World Data o també Real World Evidence
