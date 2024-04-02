@@ -10,16 +10,22 @@ Per facilitar el seguiment del progrés s'estableixen una sèrie de passes que v
 
 ### Dataset profiling and documentation	
 En aquesta passa s'utilitza l'eina d'OHDSI WhiteRabbit per connectar-se a la base de dades i generar un informe en format xlsx que describeix totes les taules i totes les columnes de la font de dades. Inicialment es planejava fer servir com a fonts de dades ESIAP per l'Atenció Primària i les taules de SOPHIA (FIC_T_) per a la atenció especialitzada. Donada la quantitat de taules a mapeijar, la redundància de moltes de les dades (ja que també hi ha dades d'AP a SOPHIA) i l'escàs detall que algunes dades tenen a SOPHIA per els propòsits de la PRISIB, es va optar finalment per només mapeijar les taules del CMBD. En futures iteracions del procés ETL s'aniran incorporant altres taules amb dades provinents de l'atenció hospitalària. 
+
 #### ScanReport FIC
 ALL_FIC-2022.xlsx és l'informe generat per WhiteRabbit sobre 6552 camps a 449 taules de SOPHIA.
+
 #### ScanReport SIAP
 ALL_ESIAP-2022.xlsx és l'informe generat per WhiteRabbit sobre 146 taules i 2355 variables del Sistema d'Informació d'Atenció Primària
+
 #### Complete table description
 Completar la columna Description de la fulla Table Overview dels anteriors informes amb la descripció de cada taula dels dos conjunts de dades analitzats.
+
 #### Complete field description
 Completar la columna Description de la fulla Field Overview dels anteriors informes amb la descripció del contingut de cada columna dels dos conjunts de dades analitzats.
+
 #### Remove innecessary tables
 Un cop analitzades les taules presents a la font de dades, decidir aquelles que finalment es traslladaran al model de dades OMOP. 
+
 ### Generation of the ETL Design	
 En aquesta passa s'utilitza l'eina d'OHDSI RabbitInAHat per llegir el informes generats per WhiteRabbit i explicitar la relació entre cada cap de cada taula de la font de dades i un camp d'entre els 371 de les taules de l'OMOP Common Data Model.
 En acabar, aquesta eina genera un informe en format comprimit json.gz que es port exportar a .docx, .csv o  .html.
@@ -30,14 +36,18 @@ Durant el procés de mappeig, fa servir una interficie gràfica per anar enllaç
 
 #### Create relationships FIC-CDM
 FIC ETL target_fields.csv
+
 #### Create relationships SIAP-CDM
 SIAP ETL target_fields.csv
+
 ### Mapping of source vocabularies	
 En aquesta passa es fa servir l'eina d'OHDSI Usagi per tal de mappeijar no les taules en si, si no el contingut de les taules que fan de diccionari a la font de dades a algun dels conceptes standard dels diccionaris incorporats dins de OMOP. 
 Es tracta d'un mapeig més conceptual que estructural que depenent de on i com s'utilitzi un codi, pot donar com a resultat un mapeig a un concepte diferent amb algun matís diferent. 
 Durant el procés de càrrega de dades, quan es carrega una informació codificada en aquests diccionaris, es busca a la taula source_to_concept_map que genera usagi amb el codi i la taula d'origen a un concept_id d'un concepte dels diccionaris d'OMOP. 
+
 #### Identify source vocabulary tables
 En aquesta passa es van buscar tots els diccionaris utilitzats a les fonts de dades. Al Milestone I report es citen aquests diccionaris.
+
 DICTIONARY ESI|Codes|Mapped|Class|Source Vocabulary|Target Vocabulary|Notes
 | ------------- | ------------- | ------------- |------------- | ------------- |------------- | ------------- |
 FZM_T_ESI_TMUNICIP|347201|65697|Location||8th level OSM|Balearic Islands and matching score 1|
@@ -92,9 +102,13 @@ En carregar la taula, s'ha de dir a quina columna del fitxer llegit es troba cad
 Com a resultat d'aquest procés s'ha generat una taula amb les columnes file_name, source_vocabulary_id, source_code, Source concept, target_concept_id, target_vocabulary_id, valid_start_date, valid_end_date i invalid_reason.
 Aquesta taula s'exporta a source_to_concept.csv que es carregarà a la taula source_to_concept_map de la base de dades i s'utilitzarà durant la càrrega de dades per codificarles amb els nous codis concept_id.
 
+---
 ## MILESTONE 1 ETL DOCUMENTATION 
+---
+
 ### Technical architecture design	
 En aquest punt, quan ja es té conéixement de les dades a harmonitzar, s'han de definir els requeriments del sistema en que es treballarà amb aquestes dades. Això inclou el maquinari i el programari del sistema on s'emmagatzemaran les dades i s'executaran les eines d'OHDSI, i les configuracions de seguretat i els procediments per accedir al servidor.
+
 #### 	Define hardware requirements
 Per tenir una referència, es va contactar amb la [SIDIAP](https://www.sidiap.org/index.php/ca/). Ens van donar una idea de les característiques del seu equipament, destacant que tenien més memòria RAM de la que seria estrictament necessària. 
 Després de buscar entre diferents proveidors de diferents fabricants, es va adquirir el següent maquinari que va instal·lar el DTIC de l'IBSalut al seu centre de dades. 
@@ -126,20 +140,29 @@ També en col·laboració del DTIC es van definir quines funcions en la instal·
 
 ### Technical ETL Development	
 Aquesta passa implica escriure, provar i documentar el codi que farà l'extracció, transformació i càrrega (ETL) de les dades des de la font al nou servidor. Per desenvolupar aquest codi, es va fer servir el portatil adquirit per aquest projecte i es va generar una màquina virtual on es van crear dos esquemes de bases de dades un amb l'estructura de les taules d'origen i l'altra amb l'OMOP CDM. Es va fer servir VirtualBox per virtualitzar la màquina, ubuntu server com a sistema operatiu de la màquina virtual i mariadb com a sistema gestor de base de dades per generar aquest entorn de proves. 
+
 #### 	Write ETL code
 El proces d'ETL es va desenvolupar fent servit l'Hitachi Pentaho Community Edition ja que permetia integrar tot el procés mantenint les conexions a les diferents bases de dades clarament definides, fer un us extensiu de la memòria carregant taules a la RAM durant la transformació i paral·lelitzar procesos de lectura i escriptura amb una interficie fàcil d'entendre i compatibilitat amb tots els sistemes tant de proves com de producció. 
+
 #### 	Documentation of code
 Pentaho genera un seguit de fitxers xml que defineixen cada passa a seguir amb el seu codi.
+
 ### Setting up of infrastructure	
 Aquesta passa suposa l'execució de tot el definit a la definició de requeriments de maquinari feta anteriorment. El procés s'ha realitzat en col·laboració amb el DTIC, el proveidor del hardware, el proveidor del sistema operatiu i el departament d'informàtica de l'IdISBa. 
+
 #### 	Hardware installation
 Realitzat pel proveïdor segons les condicions de la DTIC.
+
 #### 	Connection configuration
 Realitzada per la DTIC.
+
 #### 	Java installation
 El departament d'informàtica de l'IdISBa, amb permisos d'administrador, va instal·lar el sistema operatiu i va realitzar algunes de les configuracions bàsiques.
+
 #### 	User configuration
+
 #### 	System variables
+
 ### Installation of the OHDSI / EHDEN tools	
 	- WebAPI
 	- ATLAS
@@ -155,18 +178,29 @@ Es van realitzar algunes proves parcials d'algunes passes del procés amb Pentah
 
 El dia XX/XX/XXXX es va executar el procés de càrrega complet que va finalitzar en X h.
 
+---
 ## MILESTONE 2 ETL IMPLEMENTED AND INFRASTRUCTURE OPERATIONAL 
+---
 
 ### Technical testing of the ETL
 Equesta passa consisteix en fer servir les eines d'OHDSI per fer un primer anàlisi descriptiu de com han quedat les dades després de la ETL.
+
 #### 	Create test case framework
+
 #### 	Achilles HEEL Analysis
+
 #### 	Correction of incidences
+
 ### Data Quality Assessment	
 En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el Data quality dashboard, una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/)). La informació obtinguda amb aquesta eina s'ha utilitzat per depurar les dades i corregir el codi de la ETL. 
+
 ### Completion of the data catalogue	
 Aquesta passa consisteix en generar un informe estandarditzat amb el [paquet d'R](https://github.com/EHDEN/CatalogueExport) desenvolupat per EHDEN per publicar-lo a l'EHDEN Portal, on es poden explorar les característiques bàsiques de les fonts de dades dels diferents nodes de la xarxa. 
 
 #### Inspection Report	
 Amb el paquet d'R [CDMInspector](https://github.com/EHDEN/CdmInspection) d'EHDEN es genera una documentació amb els resultats de les diferents anàlisis de qualitat. 
 Una empresa certificada per EHDEN, en aquest cas Veratech, revisa tota la documentació de la ETL així com els diferents informes de qualitat de les dades generats després de carregar les dades. Si aquesta revisió és satisfactoria, dona certifica que el procés s'ha completat i es pot passar a participar en un primer estudi de la xarxa EHDEN. 
+
+---
+## MILESTONE 3
+---
