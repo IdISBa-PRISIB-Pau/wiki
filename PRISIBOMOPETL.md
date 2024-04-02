@@ -162,7 +162,10 @@ Equesta passa consisteix en fer servir les eines d'OHDSI per fer un primer anàl
 #### 	Achilles HEEL Analysis
 #### 	Correction of incidences
 ### Data Quality Assessment	
-En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el Data quality dashboard, una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/))
+En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el Data quality dashboard, una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/)). La informació obtinguda amb aquesta eina s'ha utilitzat per depurar les dades i corregir el codi de la ETL. 
 ### Completion of the data catalogue	
-Data catalogue export
+Aquesta passa consisteix en generar un informe estandarditzat amb el [paquet d'R](https://github.com/EHDEN/CatalogueExport) desenvolupat per EHDEN per publicar-lo a l'EHDEN Portal, on es poden explorar les característiques bàsiques de les fonts de dades dels diferents nodes de la xarxa. 
+
 #### Inspection Report	
+Amb el paquet d'R [CDMInspector](https://github.com/EHDEN/CdmInspection) d'EHDEN es genera una documentació amb els resultats de les diferents anàlisis de qualitat. 
+Una empresa certificada per EHDEN, en aquest cas Veratech, revisa tota la documentació de la ETL així com els diferents informes de qualitat de les dades generats després de carregar les dades. Si aquesta revisió és satisfactoria, dona certifica que el procés s'ha completat i es pot passar a participar en un primer estudi de la xarxa EHDEN. 
