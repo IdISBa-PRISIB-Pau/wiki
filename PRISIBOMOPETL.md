@@ -84,10 +84,36 @@ FIC_T_TIPO_INGR|8|8|Procedure||SNOMED|
 FIC_T_SEXO|4|4|Gender||Gender|
 
 #### Match with standard concepts
+Amb usagi es carrega la taula que conté com a mínim els camps source_table, source_concept i source_code. Opcionalment es pot afegir una columna amb la freqüència i alguna altra informació. En carregar la taula, s'ha de dir a quina columna del fitxer llegit es troba cada un dels camps i amb quin criteris s'ha de buscar un mappeig probable a un concepte standard. Abans de que Usagi faci aquest primer mapeig automàtic, s'han de descarregar els vocabularis destí de [Athena](https://athena.ohdsi.org). A la part inferior de la pantalla de càrrega hi ha les opcions per configurar aquest mapeig automàtic. Si no es limita a un domini o clase concret, pot tardar molt. 
+![usagiimport](https://github.com/IdISBa-PRISIB-Pau/wiki/assets/142481605/218184af-b792-4bc8-b819-ceacd4869256)
+
 #### Create SOURCE_TO_CONCEPT_MAP table
+Com a resultat d'aquest procés s'ha generat una taula amb les columnes file_name, source_vocabulary_id, source_code, Source concept, target_concept_id, target_vocabulary_id, valid_start_date, valid_end_date i invalid_reason.
+Aquesta taula s'exporta a source_to_concept.csv que es carregarà a la taula source_to_concept_map de la base de dades i s'utilitzarà durant la càrrega de dades per codificarles amb els nous codis concept_id.
+
 ## MILESTONE 1 ETL DOCUMENTATION (March)	
 ### Technical architecture design	
+En aquest punt, quan ja es té conéixement de les dades a harmonitzar, s'han de definir els requeriments del sistema en que es treballarà amb aquestes dades. Això inclou el maquinari i el programari del sistema on s'emmagatzemaran les dades i s'executaran les eines d'OHDSI, i les configuracions de seguretat i els procediments per accedir al servidor.
 #### 	Define hardware requirements
+Per tenir una referència, es va contactar amb la [SIDIAP](https://www.sidiap.org/index.php/ca/). Ens van donar una idea de les característiques del seu equipament, destacant que tenien més memòria RAM de la que seria estrictament necessària. 
+Després de buscar entre diferents proveidors de diferents fabricants, es va adquirir el següent maquinari que va instal·lar el DTIC de l'IBSalut al seu centre de dades. 
+
+Product|Description|Qty
+| ------------- | ------------- | ------------- |
+PYR2536RAN1|Fujitsu Primergy RX2530 M6 Server 10x 2.5' w/o Expander|1
+PYBCP62X3|Intel Xeon Gold Processors 6330 28C 2.0 GHz|2
+S26361-F3849-E100|Cooler Kit 2nd CPU|1
+PYBME64S J|64GB (1x64GB) 2Rx4 DDR4-3200 R ECC Modules (Total: 1,024 GB of memory)|16
+PYBSS48NKQ|SSD Drives SATA 6G 480GB Mixed-Use 2.5' H-P EP|2
+PYBSS96NKQ|SSD Drives SATA 6G 960GB Mixed-Use 2.5' H-P EP|3
+PYBSR4C6L|PRAID EP680i LP Controller|1
+PYBLA342U|Network card PLAN EP X710-T2L 2x10GBASE-T OCPV3 (2 ports of 10G BaseT)|1
+PYBRRS8S|Rack Mount Kit 1 S26361-F1452-E140 Region-kit Europe|1
+S26361-F1790-E243|Management software iRMC advanced pack|1
+PYBPU901 Power Supplies Modular PSU 900W titanium hp 2
+T26139-Y1968-E250|Power cable, 2.5m, black|2
+FSP:GN3S20Z00ESSV2|3-year warranty on site, in 9x5 conditions, NBD. Includes parts, labor and travel|1
+INSTALL|Basic hardware installation service|1
 #### 	Define software requirements
 #### 	Define security policies
 ### Technical ETL Development	
