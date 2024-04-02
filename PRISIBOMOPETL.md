@@ -25,7 +25,8 @@ En aquesta passa s'utilitza l'eina d'OHDSI RabbitInAHat per llegir el informes g
 En acabar, aquesta eina genera un informe en format comprimit json.gz que es port exportar a .docx, .csv o  .html.
 Durant el procés de mappeig, fa servir una interficie gràfica per anar enllaçant una taula a una altra que dona una primera vista general del procés ETL.
 
-![RIAHScreenshot](/imatges/RIAHScreenshot.png)
+
+![RIAHScreenshot](https://github.com/IdISBa-PRISIB-Pau/wiki/assets/142481605/0ad70d50-ba31-4a1d-9c28-f2761d2c65a6)
 
 #### Create relationships FIC-CDM
 FIC ETL target_fields.csv
