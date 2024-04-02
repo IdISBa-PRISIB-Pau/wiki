@@ -11,7 +11,7 @@ A més, s'hi han instal·lat altres eines necessàries per a la PRISIB.
 
 #### PostgreSQL
 Sistema gestor de base de dades necessari per al funcionament de les eines d'OHDSI i que també s'ha fet servir com a repositori de dades primari per a les dades harmonitzade a OMOP. 
-Les dades provinents de les [fonts de dades](./Fonts-de-dades.ms) es carreguen a la base de dades primària mitjançant el [procés ETL](./PRISIBOMOPETL.md) desenvolupat a tal efecte
+Les dades provinents de les [fonts de dades](./Fonts-de-dades.md) es carreguen a la base de dades primària mitjançant el [procés ETL](./PRISIBOMOPETL.md) desenvolupat a tal efecte
 A més, té un schema dedicat als serveis de Gitea.
 
 #### PgAdmin 4
