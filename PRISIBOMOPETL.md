@@ -23,7 +23,8 @@ Un cop analitzades les taules presents a la font de dades, decidir aquelles que 
 ### Generation of the ETL Design	
 En aquesta passa s'utilitza l'eina d'OHDSI RabbitInAHat per llegir el informes generats per WhiteRabbit i explicitar la relació entre cada cap de cada taula de la font de dades i un camp d'entre els 371 de les taules de l'OMOP Common Data Model.
 En acabar, aquesta eina genera un informe en format comprimit json.gz que es port exportar a .docx, .csv o  .html.
-Durant el procés de mappeig, fa servir una interficie gràfica per anar enllaçant una taula a una altra que dona una primera vista general del procés ETL
+Durant el procés de mappeig, fa servir una interficie gràfica per anar enllaçant una taula a una altra que dona una primera vista general del procés ETL.
+![Rabbitinahatscreenshot](./imatges/RIAHScreenshot.jpg)
 #### Create relationships FIC-CDM
 FIC ETL target_fields.csv
 #### Create relationships SIAP-CDM
