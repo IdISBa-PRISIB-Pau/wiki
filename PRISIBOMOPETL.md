@@ -1,21 +1,21 @@
 ### Introducció
 
-El 2021 es va signar un acord amb la European Health Data Evidence Network(EHDEN) per harmonitzar les dades que utilitzava la PRISIB al model de dades 
-Observational Medical Outcomes Partnership (OMOP) creat per la Observational Health Data Sciences and Informatics (OHDSI, pronounced “Odyssey”) initiative 
+El 2021 es va signar un acord amb la [European Health Data Evidence Network(EHDEN)](https://www.ehden.eu/) per harmonitzar les dades que utilitzava la PRISIB al model de dades 
+Observational Medical Outcomes Partnership (OMOP) creat per la [Observational Health Data Sciences and Informatics (OHDSI, pronounced “Odyssey”) initiative](https://www.ohdsi.org/) 
 i passar a ser un nou node de la xarxa. 
 
 L'acord estableix la entrega de 3 informes (Milestones) amb la documentació desenvolupada en el procés d'harmonització que en una de les últimes fases, 
-és certificada per una empresa externa aprovada per EHDEN (en aquest cas, Veratech).
+és certificada per una empresa externa aprovada per [EHDEN](https://www.ehden.eu/) (en aquest cas, Veratech).
 Per facilitar el seguiment del progrés s'estableixen una sèrie de passes que van generant uns resultats que es detallen a continuació:
 
 ### Dataset profiling and documentation	
-En aquesta passa s'utilitza l'eina d'OHDSI WhiteRabbit per connectar-se a la base de dades i generar un informe en format xlsx que describeix totes les taules i totes les columnes de la font de dades. Inicialment es planejava fer servir com a fonts de dades ESIAP per l'Atenció Primària i les taules de SOPHIA (FIC_T_) per a la atenció especialitzada. Donada la quantitat de taules a mapeijar, la redundància de moltes de les dades (ja que també hi ha dades d'AP a SOPHIA) i l'escàs detall que algunes dades tenen a SOPHIA per els propòsits de la PRISIB, es va optar finalment per només mapeijar les taules del CMBD. En futures iteracions del procés ETL s'aniran incorporant altres taules amb dades provinents de l'atenció hospitalària. 
+En aquesta passa s'utilitza l'eina d'[OHDSI WhiteRabbit](https://ohdsi.github.io/WhiteRabbit/WhiteRabbit.html) per connectar-se a la base de dades i generar un informe en format xlsx que describeix totes les taules i totes les columnes de la font de dades. Inicialment es planejava fer servir com a fonts de dades ESIAP per l'Atenció Primària i les taules de SOPHIA (FIC_T_) per a la atenció especialitzada. Donada la quantitat de taules a mapeijar, la redundància de moltes de les dades (ja que també hi ha dades d'AP a SOPHIA) i l'escàs detall que algunes dades tenen a SOPHIA per els propòsits de la PRISIB, es va optar finalment per només mapeijar les taules del CMBD. En futures iteracions del procés ETL s'aniran incorporant altres taules amb dades provinents de l'atenció hospitalària. 
 
 #### ScanReport FIC
-ALL_FIC-2022.xlsx és l'informe generat per WhiteRabbit sobre 6552 camps a 449 taules de SOPHIA.
+ALL_FIC-2022.xlsx és l'informe generat per [WhiteRabbit](https://ohdsi.github.io/WhiteRabbit/WhiteRabbit.html) sobre 6552 camps a 449 taules de SOPHIA.
 
 #### ScanReport SIAP
-ALL_ESIAP-2022.xlsx és l'informe generat per WhiteRabbit sobre 146 taules i 2355 variables del Sistema d'Informació d'Atenció Primària
+ALL_ESIAP-2022.xlsx és l'informe generat per [WhiteRabbit](https://ohdsi.github.io/WhiteRabbit/WhiteRabbit.html) sobre 146 taules i 2355 variables del Sistema d'Informació d'Atenció Primària
 
 #### Complete table description
 Completar la columna Description de la fulla Table Overview dels anteriors informes amb la descripció de cada taula dels dos conjunts de dades analitzats.
@@ -27,7 +27,7 @@ Completar la columna Description de la fulla Field Overview dels anteriors infor
 Un cop analitzades les taules presents a la font de dades, decidir aquelles que finalment es traslladaran al model de dades OMOP. 
 
 ### Generation of the ETL Design	
-En aquesta passa s'utilitza l'eina d'OHDSI RabbitInAHat per llegir el informes generats per WhiteRabbit i explicitar la relació entre cada cap de cada taula de la font de dades i un camp d'entre els 371 de les taules de l'OMOP Common Data Model.
+En aquesta passa s'utilitza l'eina d'[OHDSI RabbitInAHat](https://ohdsi.github.io/WhiteRabbit/RabbitInAHat.html) per llegir el informes generats per WhiteRabbit i explicitar la relació entre cada cap de cada taula de la font de dades i un camp d'entre els 371 de les taules de l'OMOP Common Data Model.
 En acabar, aquesta eina genera un informe en format comprimit json.gz que es port exportar a .docx, .csv o  .html.
 Durant el procés de mappeig, fa servir una interficie gràfica per anar enllaçant una taula a una altra que dona una primera vista general del procés ETL.
 
@@ -41,7 +41,7 @@ FIC ETL target_fields.csv
 SIAP ETL target_fields.csv
 
 ### Mapping of source vocabularies	
-En aquesta passa es fa servir l'eina d'OHDSI Usagi per tal de mappeijar no les taules en si, si no el contingut de les taules que fan de diccionari a la font de dades a algun dels conceptes standard dels diccionaris incorporats dins de OMOP. 
+En aquesta passa es fa servir l'eina d'[OHDSI Usagi](https://ohdsi.github.io/Usagi/) per tal de mappeijar no les taules en si, si no el contingut de les taules que fan de diccionari a la font de dades a algun dels conceptes standard dels diccionaris incorporats dins de OMOP. 
 Es tracta d'un mapeig més conceptual que estructural que depenent de on i com s'utilitzi un codi, pot donar com a resultat un mapeig a un concepte diferent amb algun matís diferent. 
 Durant el procés de càrrega de dades, quan es carrega una informació codificada en aquests diccionaris, es busca a la taula source_to_concept_map que genera usagi amb el codi i la taula d'origen a un concept_id d'un concepte dels diccionaris d'OMOP. 
 
@@ -142,7 +142,7 @@ També en col·laboració del DTIC es van definir quines funcions en la instal·
 Aquesta passa implica escriure, provar i documentar el codi que farà l'extracció, transformació i càrrega (ETL) de les dades des de la font al nou servidor. Per desenvolupar aquest codi, es va fer servir el portatil adquirit per aquest projecte i es va generar una màquina virtual on es van crear dos esquemes de bases de dades un amb l'estructura de les taules d'origen i l'altra amb l'OMOP CDM. Es va fer servir VirtualBox per virtualitzar la màquina, ubuntu server com a sistema operatiu de la màquina virtual i mariadb com a sistema gestor de base de dades per generar aquest entorn de proves. 
 
 #### 	Write ETL code
-El proces d'ETL es va desenvolupar fent servit l'Hitachi Pentaho Community Edition ja que permetia integrar tot el procés mantenint les conexions a les diferents bases de dades clarament definides, fer un us extensiu de la memòria carregant taules a la RAM durant la transformació i paral·lelitzar procesos de lectura i escriptura amb una interficie fàcil d'entendre i compatibilitat amb tots els sistemes tant de proves com de producció. 
+El proces d'ETL es va desenvolupar fent servit l'[Hitachi Pentaho Community Edition](https://www.hitachivantara.com/es-latam/products/pentaho-platform/data-integration-analytics/pentaho-community-edition.html) ja que permetia integrar tot el procés mantenint les conexions a les diferents bases de dades clarament definides, fer un us extensiu de la memòria carregant taules a la RAM durant la transformació i paral·lelitzar procesos de lectura i escriptura amb una interficie fàcil d'entendre i compatibilitat amb tots els sistemes tant de proves com de producció. 
 
 #### 	Documentation of code
 Pentaho genera un seguit de fitxers xml que defineixen cada passa a seguir amb el seu codi.
@@ -172,7 +172,7 @@ El departament d'informàtica de l'IdISBa, amb permisos d'administrador, va inst
 
 
 Un cop realitzades totes les taques prèvies, es va procedir a la primera càrrega de dades. En principi, es preveu repetir-la cada 3 mesos millorant en cada iteració el mapeig de dades amb noves taules i nous conceptes. 
-Per això es va instal·lar Hitachi Pentaho Community Edition al servidor, es va càrregar el procediment ETL desenvolupat al portatil i es van canviar els paràmetres de les connexions. També es van fer alguns ajustos al codi per canviar de fer servir mariadb a llegir de Oracle i escriure a Postgresql. 
+Per això es va instal·lar [Hitachi Pentaho Community Edition](https://www.hitachivantara.com/es-latam/products/pentaho-platform/data-integration-analytics/pentaho-community-edition.html) al servidor, es va càrregar el procediment ETL desenvolupat al portàtil i es van canviar els paràmetres de les connexions. També es van fer alguns ajustos al codi per canviar de fer servir mariadb a llegir de Oracle i escriure a Postgresql. 
 Per minimitzar l'impacte de la càrrega de dades per altres usuaris, des del DTIC es va fer una còpia de les taules a carregar de NIXP a NIXT, el servidor de preproducció. 
 Es van realitzar algunes proves parcials d'algunes passes del procés amb Pentaho, limitant les queries a 1000 files de resultats. 
 
@@ -192,10 +192,10 @@ Equesta passa consisteix en fer servir les eines d'OHDSI per fer un primer anàl
 #### 	Correction of incidences
 
 ### Data Quality Assessment	
-En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el Data quality dashboard, una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/)). La informació obtinguda amb aquesta eina s'ha utilitzat per depurar les dades i corregir el codi de la ETL. 
+En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el [Data Quality Dashboard](https://github.com/OHDSI/DataQualityDashboard), una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/)). La informació obtinguda amb aquesta eina s'ha utilitzat per depurar les dades i corregir el codi de la ETL. 
 
 ### Completion of the data catalogue	
-Aquesta passa consisteix en generar un informe estandarditzat amb el [paquet d'R](https://github.com/EHDEN/CatalogueExport) desenvolupat per EHDEN per publicar-lo a l'EHDEN Portal, on es poden explorar les característiques bàsiques de les fonts de dades dels diferents nodes de la xarxa. 
+Aquesta passa consisteix en generar un informe estandarditzat amb el [paquet d'R](https://github.com/EHDEN/CatalogueExport) desenvolupat per EHDEN per publicar-lo a l'[EHDEN Portal](https://portal.ehden.eu/), on es poden explorar les característiques bàsiques de les fonts de dades dels diferents nodes de la xarxa. 
 
 #### Inspection Report	
 Amb el paquet d'R [CDMInspector](https://github.com/EHDEN/CdmInspection) d'EHDEN es genera una documentació amb els resultats de les diferents anàlisis de qualitat. 
