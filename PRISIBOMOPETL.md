@@ -35,7 +35,34 @@ SIAP ETL target_fields.csv
 ### Mapping of source vocabularies	
 En aquesta passa es fa servir l'eina d'OHDSI Usagi per tal de mappeijar no les taules en si, si no el contingut de les taules que fan de diccionari a la font de dades a algun dels conceptes standard dels diccionaris incorporats dins de OMOP. 
 Es tracta d'un mapeig més conceptual que estructural que depenent de on i com s'utilitzi un codi, pot donar com a resultat un mapeig a un concepte diferent amb algun matís diferent. 
+Durant el procés de càrrega de dades, quan es carrega una informació codificada en aquests diccionaris, es busca a la taula source_to_concept_map que genera usagi amb el codi i la taula d'origen a un concept_id d'un concepte dels diccionaris d'OMOP. 
 #### Identify source vocabulary tables
+En aquesta passa es van buscar tots els diccionaris utilitzats a les fonts de dades. Al Milestone I report es citen aquests diccionaris.
+DICTIONARY ESI|Codes|Mapped|Class|Source Vocabulary|Target Vocabulary|Notes
+| ------------- | ------------- | ------------- |------------- | ------------- |------------- | ------------- |
+FZM_T_ESI_TMUNICIP|347201|65697|Location|8th level OSM|Balearic Islands and matching score 1|
+FZM_T_ESI_TICD9|39319|4749|Condition|ICD9, ICPC-2, SNOMED|>80% of codes|
+FZM_T_ESI_TPRIACT_DET|16230|934|Clinical Drug Box|National Drug Nomenclator|RxNorm|
+FZM_T_ESI_TPRIACT_CAB|12331|1758|Clinical Drug Form||RxNorm|>80% of prescriptions|
+FZM_T_ESI_TANALITI_DET|3115|1233|Measurement||LOINC||
+FZM_T_ESI_TANALITI|1776|705|Measurement||LOINC||
+FZM_T_ESI_TIMAGENES|924|846|Procedure|SERAM|SNOMED||
+FZM_T_ESI_TACTU_DE|528|368|Procedure|ICD9CM|LOINC & SNOMED||
+FZM_T_ESI_TACTIVIDADES|462|134|Procedure||SNOMED||
+FZM_T_ESI_TPAIS|266|248|Location||SNOMED||
+FZM_T_ESI_TRX|170|152|Procedure|SERAM|SNOMED||
+FZM_T_ESI_TPROCEDIMIENTOS|129|117|Procedure||SNOMED||
+FZM_T_ESI_TVACUNAS|101|100|Drugs||RxNorm||
+FZM_T_ESI_TCATEGOR|87|67|Social Context, Answer, Physician Specialty, Provider||SNOMED, LOINC, Medicare Specialty, NUCC||
+FZM_T_ESI_TPC|86|75|Observable Entity, Clinical Observation||SNOMED, LOINC||
+FZM_T_ESI_REC_FRECUENCIA|69|62|Qualifier Value||SNOMED||
+FZM_T_ESI_TFAC_RIE|64|55|Observation||SNOMED||
+FZM_T_ESI_TVIA_ADMI|63|60|Qualifier Value||SNOMED||
+FZM_T_ESI_TTIPOVIA|49|49|Location||OSM, SNOMED||
+FZM_T_ESI_TINTERVENCIONES|48|48|Procedure||SNOMED||
+FZM_T_ESI_TALERGIA|36|26|Clinical|Finding||SNOMED||
+FZM_T_ESI_TNOC|28|26|Procedure||SNOMED||
+FZM_T_ESI_TEXITUS|4|3|Event||SNOMED||
 #### Match with standard concepts
 #### Create SOURCE_TO_CONCEPT_MAP table
 ## MILESTONE 1 ETL DOCUMENTATION (March)	
