@@ -91,7 +91,7 @@ Amb usagi es carrega la taula que conté com a mínim els camps source_table, so
 Com a resultat d'aquest procés s'ha generat una taula amb les columnes file_name, source_vocabulary_id, source_code, Source concept, target_concept_id, target_vocabulary_id, valid_start_date, valid_end_date i invalid_reason.
 Aquesta taula s'exporta a source_to_concept.csv que es carregarà a la taula source_to_concept_map de la base de dades i s'utilitzarà durant la càrrega de dades per codificarles amb els nous codis concept_id.
 
-## MILESTONE 1 ETL DOCUMENTATION (March)	
+## MILESTONE 1 ETL DOCUMENTATION 
 ### Technical architecture design	
 En aquest punt, quan ja es té conéixement de les dades a harmonitzar, s'han de definir els requeriments del sistema en que es treballarà amb aquestes dades. Això inclou el maquinari i el programari del sistema on s'emmagatzemaran les dades i s'executaran les eines d'OHDSI, i les configuracions de seguretat i els procediments per accedir al servidor.
 #### 	Define hardware requirements
@@ -121,25 +121,48 @@ També es va decidir en aquest punt, que es faria servir postgres també com a S
 Un cop instal·lat el servidor i després de començar a treballar amb ell es va veure que no podiem fer servir tots la versió desktop de RStudio simultàneament, pel qual es va buscar com instal·lar una instància d'RStudio Server i es va veure que s'havia de fer amb el Windows Subsystem for Linux (WSL). Amb aquesta eina de Windows Server, es crea un sistema virtual que fa servir com a Sistema Operatiu Ubuntu Server X.X. D'aquesta manera podem accedir des del navegador web a l'RStudio Server sense iniciar sesió com usuari de Windows. 
 
 #### 	Define security policies
+També en col·laboració del DTIC es van definir quines funcions en la instal·lació, posada en marxa, manteniment i resolució d'incidències  realitzaria cada una de els parts implicades.
+
 ### Technical ETL Development	
+Aquesta passa implica escriure, provar i documentar el codi que farà l'extracció, transformació i càrrega (ETL) de les dades des de la font al nou servidor. Per desenvolupar aquest codi, es va fer servir el portatil adquirit per aquest projecte i es va generar una màquina virtual on es van crear dos esquemes de bases de dades un amb l'estructura de les taules d'origen i l'altra amb l'OMOP CDM. Es va fer servir VirtualBox per virtualitzar la màquina, ubuntu server com a sistema operatiu de la màquina virtual i mariadb com a sistema gestor de base de dades per generar aquest entorn de proves. 
 #### 	Write ETL code
+El proces d'ETL es va desenvolupar fent servit l'Hitachi Pentaho Community Edition ja que permetia integrar tot el procés mantenint les conexions a les diferents bases de dades clarament definides, fer un us extensiu de la memòria carregant taules a la RAM durant la transformació i paral·lelitzar procesos de lectura i escriptura amb una interficie fàcil d'entendre i compatibilitat amb tots els sistemes tant de proves com de producció. 
 #### 	Documentation of code
+Pentaho genera un seguit de fitxers xml que defineixen cada passa a seguir amb el seu codi.
 ### Setting up of infrastructure	
+Aquesta passa suposa l'execució de tot el definit a la definició de requeriments de maquinari feta anteriorment. El procés s'ha realitzat en col·laboració amb el DTIC, el proveidor del hardware, el proveidor del sistema operatiu i el departament d'informàtica de l'IdISBa. 
 #### 	Hardware installation
+Realitzat pel proveïdor segons les condicions de la DTIC.
 #### 	Connection configuration
+Realitzada per la DTIC.
 #### 	Java installation
+El departament d'informàtica de l'IdISBa, amb permisos d'administrador, va instal·lar el sistema operatiu i va realitzar algunes de les configuracions bàsiques.
 #### 	User configuration
 #### 	System variables
 ### Installation of the OHDSI / EHDEN tools	
-	WebAPI
-	ATLAS
-	Python
-	R
-## MILESTONE 2 ETL IMPLEMENTED AND INFRASTRUCTURE OPERATIONAL (September)	
-### Technical testing of the ETL	
+	- WebAPI
+	- ATLAS
+	- Python
+	- R
+ Realitzada també amb l'ajuda del departament d'informàtica de l'IdISBa
+
+
+Un cop realitzades totes les taques prèvies, es va procedir a la primera càrrega de dades. En principi, es preveu repetir-la cada 3 mesos millorant en cada iteració el mapeig de dades amb noves taules i nous conceptes. 
+Per això es va instal·lar Hitachi Pentaho Community Edition al servidor, es va càrregar el procediment ETL desenvolupat al portatil i es van canviar els paràmetres de les connexions. També es van fer alguns ajustos al codi per canviar de fer servir mariadb a llegir de Oracle i escriure a Postgresql. 
+Per minimitzar l'impacte de la càrrega de dades per altres usuaris, des del DTIC es va fer una còpia de les taules a carregar de NIXP a NIXT, el servidor de preproducció. 
+Es van realitzar algunes proves parcials d'algunes passes del procés amb Pentaho, limitant les queries a 1000 files de resultats. 
+
+El dia XX/XX/XXXX es va executar el procés de càrrega complet que va finalitzar en X h.
+
+## MILESTONE 2 ETL IMPLEMENTED AND INFRASTRUCTURE OPERATIONAL 
+
+### Technical testing of the ETL
+Equesta passa consisteix en fer servir les eines d'OHDSI per fer un primer anàlisi descriptiu de com han quedat les dades després de la ETL.
 #### 	Create test case framework
 #### 	Achilles HEEL Analysis
 #### 	Correction of incidences
-### Data Quality Assessment	Data quality dashboard
-### Completion of the data catalogue	Data catalogue export
+### Data Quality Assessment	
+En aquesta passa s'executen els anàlisis de qualitat estandarditzats en el Data quality dashboard, una eina d'OHDSI ([exemple amb dades sintètiques](https://data.ohdsi.org/DataQualityDashboard/))
+### Completion of the data catalogue	
+Data catalogue export
 #### Inspection Report	
