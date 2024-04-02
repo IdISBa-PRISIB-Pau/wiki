@@ -29,6 +29,8 @@ FIC ETL target_fields.csv
 #### Create relationships SIAP-CDM
 SIAP ETL target_fields.csv
 ### Mapping of source vocabularies	
+En aquesta passa es fa servir l'eina d'OHDSI Usagi per tal de mappeijar no les taules en si, si no el contingut de les taules que fan de diccionari a la font de dades a algun dels conceptes standard dels diccionaris incorporats dins de OMOP. 
+Es tracta d'un mapeig més conceptual que estructural que depenent de on i com s'utilitzi un codi, pot donar com a resultat un mapeig a un concepte diferent amb algun matís diferent. 
 #### Identify source vocabulary tables
 #### Match with standard concepts
 #### Create SOURCE_TO_CONCEPT_MAP table
