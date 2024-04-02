@@ -110,11 +110,16 @@ PYBSR4C6L|PRAID EP680i LP Controller|1
 PYBLA342U|Network card PLAN EP X710-T2L 2x10GBASE-T OCPV3 (2 ports of 10G BaseT)|1
 PYBRRS8S|Rack Mount Kit 1 S26361-F1452-E140 Region-kit Europe|1
 S26361-F1790-E243|Management software iRMC advanced pack|1
-PYBPU901 Power Supplies Modular PSU 900W titanium hp 2
+PYBPU901|Power Supplies Modular PSU 900W titanium hp|2
 T26139-Y1968-E250|Power cable, 2.5m, black|2
 FSP:GN3S20Z00ESSV2|3-year warranty on site, in 9x5 conditions, NBD. Includes parts, labor and travel|1
 INSTALL|Basic hardware installation service|1
+
 #### 	Define software requirements
+Després de parlar amb el DTIC es va decidir instal·lar un SO windows server. 
+També es va decidir en aquest punt, que es faria servir postgres també com a Sistema gestor de base de dades primari per a les dades harmonitzades.
+Un cop instal·lat el servidor i després de començar a treballar amb ell es va veure que no podiem fer servir tots la versió desktop de RStudio simultàneament, pel qual es va buscar com instal·lar una instància d'RStudio Server i es va veure que s'havia de fer amb el Windows Subsystem for Linux (WSL). Amb aquesta eina de Windows Server, es crea un sistema virtual que fa servir com a Sistema Operatiu Ubuntu Server X.X. D'aquesta manera podem accedir des del navegador web a l'RStudio Server sense iniciar sesió com usuari de Windows. 
+
 #### 	Define security policies
 ### Technical ETL Development	
 #### 	Write ETL code
