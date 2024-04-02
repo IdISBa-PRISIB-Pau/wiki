@@ -40,9 +40,9 @@ Durant el procés de càrrega de dades, quan es carrega una informació codifica
 En aquesta passa es van buscar tots els diccionaris utilitzats a les fonts de dades. Al Milestone I report es citen aquests diccionaris.
 DICTIONARY ESI|Codes|Mapped|Class|Source Vocabulary|Target Vocabulary|Notes
 | ------------- | ------------- | ------------- |------------- | ------------- |------------- | ------------- |
-FZM_T_ESI_TMUNICIP|347201|65697|Location|8th level OSM|Balearic Islands and matching score 1|
-FZM_T_ESI_TICD9|39319|4749|Condition|ICD9, ICPC-2, SNOMED|>80% of codes|
-FZM_T_ESI_TPRIACT_DET|16230|934|Clinical Drug Box|National Drug Nomenclator|RxNorm|
+FZM_T_ESI_TMUNICIP|347201|65697|Location||8th level OSM|Balearic Islands and matching score 1|
+FZM_T_ESI_TICD9|39319|4749|Condition|ICD9, ICPC-2 | SNOMED|>80% of codes|
+FZM_T_ESI_TPRIACT_DET|16230|934|Clinical Drug Box|National Drug Nomenclator|RxNorm||
 FZM_T_ESI_TPRIACT_CAB|12331|1758|Clinical Drug Form||RxNorm|>80% of prescriptions|
 FZM_T_ESI_TANALITI_DET|3115|1233|Measurement||LOINC||
 FZM_T_ESI_TANALITI|1776|705|Measurement||LOINC||
@@ -60,9 +60,29 @@ FZM_T_ESI_TFAC_RIE|64|55|Observation||SNOMED||
 FZM_T_ESI_TVIA_ADMI|63|60|Qualifier Value||SNOMED||
 FZM_T_ESI_TTIPOVIA|49|49|Location||OSM, SNOMED||
 FZM_T_ESI_TINTERVENCIONES|48|48|Procedure||SNOMED||
-FZM_T_ESI_TALERGIA|36|26|Clinical|Finding||SNOMED||
+FZM_T_ESI_TALERGIA|36|26|Clinical Finding||SNOMED||
 FZM_T_ESI_TNOC|28|26|Procedure||SNOMED||
 FZM_T_ESI_TEXITUS|4|3|Event||SNOMED||
+
+
+DICTIONARY FIC|Codes|Mapped|Class|Source Vocabulary|Target Vocabulary|Notes
+| ------------- | ------------- | ------------- |------------- | ------------- |------------- | ------------- |
+FIC_T_DIAGNOSTICOS|114388|112559|Condition|ICD9, ICD10|SNOMED|Many duplications|
+FIC_T_PROCEDIMIENTOS|84374|2262|Procedure|Internal codes, ICD9Proc & ICD10PCS|SNOMED|Many duplications|
+FIC_T_FAR_PRES_FAR|16243|482|Clinical Drug Boxes||RxNorm|
+FIC_T_FAR_PRINACT|10630|10618|Ingredient|ATC|RxNorm|Most entries are duplicated with keys changed over time|
+FIC_T_LAB_PRUEBA|5540|620|Lab Test||LOINC|95% of frequency|
+FIC_T_PRESTACION_SERAM|3420|2402|Procedure|SERAM|SNOMED|Multiple entries for the same code|
+FIC_T_SERVICIO|2960|2309|Location, Provider, Physician Specialty||SNOMED, LOINC, Medicare Specialty, NUCC|
+FIC_T_LAB_MICROORGANISMOS|1209|1163|Organism||SNOMED|
+FIC_T_FAR_FORMA_FARM|507|359|Dose Form, Qualifier Value||SNOMED|
+FIC_T_PAIS|504|242|Location||SNOMED|
+FIC_T_LAB_UNIDAD|186|136|Unit||UCUM|
+FIC_T_FAR_FRECUENCIA|86|78|Qualifier Value||SNOMED|
+FIC_T_FAR_VIA_ADMON|64|55|Qualifier Value||SNOMED|
+FIC_T_TIPO_INGR|8|8|Procedure||SNOMED|
+FIC_T_SEXO|4|4|Gender||Gender|
+
 #### Match with standard concepts
 #### Create SOURCE_TO_CONCEPT_MAP table
 ## MILESTONE 1 ETL DOCUMENTATION (March)	
