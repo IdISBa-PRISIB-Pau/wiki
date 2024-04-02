@@ -84,7 +84,8 @@ FIC_T_TIPO_INGR|8|8|Procedure||SNOMED|
 FIC_T_SEXO|4|4|Gender||Gender|
 
 #### Match with standard concepts
-Amb usagi es carrega la taula que conté com a mínim els camps source_table, source_concept i source_code. Opcionalment es pot afegir una columna amb la freqüència i alguna altra informació. En carregar la taula, s'ha de dir a quina columna del fitxer llegit es troba cada un dels camps i amb quin criteris s'ha de buscar un mappeig probable a un concepte standard. Abans de que Usagi faci aquest primer mapeig automàtic, s'han de descarregar els vocabularis destí de [Athena](https://athena.ohdsi.org). A la part inferior de la pantalla de càrrega hi ha les opcions per configurar aquest mapeig automàtic. Si no es limita a un domini o clase concret, pot tardar molt. 
+Amb usagi es carrega la taula que conté com a mínim els camps source code, source name i source table. Opcionalment es pot afegir una columna amb la freqüència i alguna altra informació. La descripció del concepte que Usagi utilitza per intentar trobar un concepte equivalent ha destar en anglés, de manera que la taula amb tots els conceptes d'origen es va traduir fent us de google translate tal com es recomana a ehden i després de comprobar que realment no s'allunya massa del significat original. 
+En carregar la taula, s'ha de dir a quina columna del fitxer llegit es troba cada un dels camps i amb quin criteris s'ha de buscar un mappeig probable a un concepte standard. Abans de que Usagi faci aquest primer mapeig automàtic, s'han de descarregar els vocabularis destí de [Athena](https://athena.ohdsi.org). A la part inferior de la pantalla de càrrega hi ha les opcions per configurar aquest mapeig automàtic. Si no es limita a un domini o clase concret, pot tardar molt. 
 ![usagiimport](https://github.com/IdISBa-PRISIB-Pau/wiki/assets/142481605/218184af-b792-4bc8-b819-ceacd4869256)
 
 #### Create SOURCE_TO_CONCEPT_MAP table
