@@ -10,7 +10,7 @@ Es crea aquesta wiki amb la intenció de referenciar i explicar recursos de form
 #### [Procediments i reglaments interns](./Procediments-i-reglaments-interns.md)
 #### [Eines de la PRISIB](./Eines-de-la-PRISIB.md)
 #### [Fonts de dades](./Fonts-de-dades.md)
-
+#### [Recursos](./Recursos.md)
 
 ### Institucions
 #### EOSC-Association
