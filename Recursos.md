@@ -1,9 +1,12 @@
 A part dels recursos que aporten altres institucions con l'IBSalut i l'IdISBa, la PRISIB compta amb alguns recursos "propis" en la mesura en que son d'ús més o menys exclusiu per la plataforma. 
 Aquests recursos i la informació asociada a ells es detalla a continuació:
 
-### Portàtil EHDEN
+### Portàtil 01
 Per poder fer servir les eines d'OHDSI per harmonitzar les dades a que té accés la PRISIB al model de dades OMOP, es va adquirir un portàtil a càrrec de l'acord amb EHDEN signat amb aquesta finalitat.
 (Informació Portàtil)
+
+### Portàtil 02-04
+Aquirits el 2024 per tenir més flexibilitat per acudir a reunions, cursos i congresos i poder treballar amb les eines d'OHDSI amb més flexibilitat.
 
 ### Servidor PRISIB
 Aquest servidor es va adquirir amb els fons de l'acord signat amb EHDEN per crear un node de dades harmonitzades al model OMOP amb les eines d'OHDSI instal·lades. 
