@@ -2,6 +2,21 @@ name: Remove Emails from README
 
 on: [push]
 
+permissions:
+  actions: read
+  checks: read
+  contents: write
+  deployments: read
+  id-token: read
+  issues: none
+  discussions: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: read
+
 jobs:
   remove-emails:
     runs-on: ubuntu-latest
