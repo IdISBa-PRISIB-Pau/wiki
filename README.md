@@ -18,3 +18,6 @@ Es crea aquesta wiki amb la intenció de referenciar i explicar recursos de form
 #### OHDSI
 #### Impact-Data
 #### REGIC
+
+test de workflow github 
+ pfsdf@fsd.mal
