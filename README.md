@@ -20,4 +20,4 @@ Es crea aquesta wiki amb la intenció de referenciar i explicar recursos de form
 #### REGIC
 
 test de workflow github 
- pfsdf@fsd.mal
+ [removed]
